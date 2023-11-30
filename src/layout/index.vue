@@ -1,12 +1,10 @@
 <template>
   <div id="layuot">
-    <!-- <div class="left">
-            <sider></sider>
-        </div> -->
+    <div class="left">
+      <sider></sider>
+    </div>
     <div class="right">
-      <!-- <app-main></app-main> -->
-      <!-- 表单组件 -->
-      <login/>
+      <app-main></app-main>
     </div>
   </div>
 </template>
@@ -14,7 +12,6 @@
 // import { ref } from 'vue'
 import sider from "./sider.vue";
 import appMain from "./appMain.vue";
-import login from "../views/login/index.vue";
 </script>
 <style scoped lang="scss">
 #layuot {

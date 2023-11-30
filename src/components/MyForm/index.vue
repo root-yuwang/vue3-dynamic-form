@@ -21,11 +21,17 @@
       </el-form-item>
     </template>
   </el-form>
-  <el-button v-bind="formButton">保存</el-button>
+  <div class="btn-box" v-if="buttonItems.length">
+    <Mybutton :buttonItems="buttonItems"></Mybutton>
+  </div>
 </template>
 <script setup lang="tsx">
 import { ref, toRefs } from "vue";
 import { getRulesValidate } from "../../utils/form";
+import type { ElForm, FormInstance } from "element-plus";
+import Mybutton from "../MyButton/index.vue";
+
+const formRef = ref<FormInstance>();
 const props = defineProps({
   //  表单值
   formModel: {
@@ -42,9 +48,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  formButton: {
-    type: Object,
-    default: () => {},
+
+  buttonItems: {
+    type: Array,
+    default: () => [],
   },
 });
 
@@ -53,8 +60,14 @@ const { formItems, formConfig, formModel } = toRefs(props);
 
 formConfig.value.rules = getRulesValidate(formItems.value);
 
-
 defineExpose({
   formModel: formModel.value,
+  formEl: formRef,
 });
 </script>
+<style lang="scss">
+.btn-box {
+  display: flex;
+  justify-content: flex-end;
+}
+</style>

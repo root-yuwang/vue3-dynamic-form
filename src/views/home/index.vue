@@ -1,8 +1,6 @@
 <template>
-    <div>{{ msg }}</div>
+  我是首页
 </template>
 <script setup lang="ts">
-// import { ref } from 'vue'
-const msg = '首页'
 </script>
 <style scoped lang="scss"></style>

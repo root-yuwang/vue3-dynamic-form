@@ -1,85 +1,124 @@
 <template>
-  <div>
-    <Myform
-      ref="myFormRef"
-      :formConfig="formConfig"
-      :formModel="formModel"
-      :formItems="formItems"
-      :formButton="formButton"
-    />
+  <div class="bg">
+    <div class="login-box">
+      <h2 class="title">YY管理后台</h2>
+      <Myform
+        ref="myFormRef"
+        :formConfig="formConfig"
+        :formModel="formModel"
+        :formItems="formItems"
+      />
+      <div class="btn-box">
+        <el-button class="btn" type="primary" @click="toRouter">登录</el-button>
+      </div>
+    </div>
   </div>
 </template>
-<script setup lang="tsx">
+<script setup lang="ts">
+import { useRouter } from "vue-router";
+import { ref } from "vue";
 import Myform from "../../components/MyForm/index.vue";
-import { ElForm } from "element-plus";
-
-import { ref, reactive } from "vue";
+import type { ElForm, FormInstance, FormProps } from "element-plus";
 import { Login } from "../../api/interface/form";
-type FormInstance = InstanceType<typeof ElForm>
-
 const myFormRef = ref<FormInstance>();
-
+// 表单配置项
 const formConfig = {
   labelPosition: "right", //表单label对齐方式
   inline: true,
   labelWidth: "70px",
 };
-const validateUserName = (rule: any, value: any, callback: any) => {
-  if (value === "") {
-    callback(new Error("请输入用户名"));
-  } else {
-    callback();
-  }
-};
+// 表单信息
+const formModel = ref<Login.loginForm>({
+  username: "daa",
+  password: "13131",
+});
+// 表单内容
 const formItems = [
   {
     type: "el-input",
-    prop: "userName",
-    placeholder: "请输入账号",
-    label: "账号",
+    prop: "username",
+    placeholder: "请输入用户名",
+    label: "用户名",
     isValidate: true,
+    size: "small",
+    style: {
+      width: "92%",
+    },
     rule: [
       {
         required: true,
-        message: "请输入姓名",
+        message: "请输入用户名",
         trigger: "blur",
       },
-      { min: 3, max: 5, message: "长度再3-5个字符", trigger: "blur" },
-      { validator: validateUserName, trigger: "blur" },
     ],
   },
   {
     type: "el-input",
-    prop: "passWord",
+    prop: "password",
     placeholder: "请输入密码",
     label: "密码",
     isValidate: true,
-  },
-  {
-    type: "el-input",
-    prop: "code",
-    placeholder: "请输入验证码",
-    label: "验证码",
-    isValidate: true,
+    size: "small",
+    style: {
+      width: "92%",
+    },
+    rule: [
+      {
+        required: true,
+        message: "请输入密码",
+        trigger: "blur",
+      },
+    ],
   },
 ];
 
-const formModel = reactive<Login.reqLoginForm>({
-  userName: "",
-  passWord: "",
-  code: "",
-});
-const onSubmitClick = (element) => {
-  console.log("element", element);
-};
-
-const formButton = {
-  type: "primary",
-  size: "mini",
-  plain: true,
-  onclick: () => {
-    onSubmitClick(myFormRef.value.element);
-  },
+const Router = useRouter();
+const toRouter = () => {
+  let formEl = myFormRef.value.formEl;
+  formEl.validate((valid: any, fields: any) => {
+    if (valid) {
+      Router.push({
+        path: "/home",
+      });
+    } else {
+      console.log("error submit!", fields);
+    }
+  });
 };
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.bg {
+  width: 100%;
+  height: 100vh;
+  background: url(../../assets/images/login-bg.png) no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  .login-box {
+    position: absolute;
+    right: 300px;
+    bottom: 400px;
+    width: 400px;
+    border-radius: 10px;
+    background-color: rgb(95 187 188 / 84%);
+    .title {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-box {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+
+      .btn {
+        width: 350px;
+        background: #249a82;
+        border: none;
+      }
+    }
+  }
+}
+</style>
