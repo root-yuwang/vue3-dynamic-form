@@ -23,7 +23,7 @@ const staticRouter: RouteRecordRaw[] = [
     component: Layout,
     children: [
       {
-        path: "/home",
+        path: "/",
         name: "home",
         component: Home,
         meta: {

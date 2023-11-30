@@ -5,7 +5,7 @@
     @open="handleOpen"
     @close="handleClose"
   >
-    <el-menu-item index="2" @click="toRouter('/home')">
+    <el-menu-item index="2" @click="toRouter('/')">
       <el-icon><icon-menu /></el-icon>
       <template #title>首页</template>
     </el-menu-item>

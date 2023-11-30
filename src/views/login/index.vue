@@ -78,7 +78,7 @@ const toRouter = () => {
   formEl.validate((valid: any, fields: any) => {
     if (valid) {
       Router.push({
-        path: "/home",
+        path: "/",
       });
     } else {
       console.log("error submit!", fields);

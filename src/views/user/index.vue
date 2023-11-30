@@ -8,7 +8,7 @@
       width="50%"
       :before-close="handleClose"
     >
-      <Myform
+      <MyForm
         ref="myFormRef"
         :formConfig="formConfig"
         :formModel="formModel"
@@ -19,7 +19,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import Myform from "../../components/MyForm/index.vue";
+import MyForm from "../../components/MyForm/index.vue";
 import type { ElForm, FormInstance, FormProps } from "element-plus";
 
 import { ref, reactive } from "vue";

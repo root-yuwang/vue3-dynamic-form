@@ -22,14 +22,14 @@
     </template>
   </el-form>
   <div class="btn-box" v-if="buttonItems.length">
-    <Mybutton :buttonItems="buttonItems"></Mybutton>
+    <MyButton :buttonItems="buttonItems"></MyButton>
   </div>
 </template>
 <script setup lang="tsx">
 import { ref, toRefs } from "vue";
 import { getRulesValidate } from "../../utils/form";
 import type { ElForm, FormInstance } from "element-plus";
-import Mybutton from "../MyButton/index.vue";
+import MyButton from "../MyButton/index.vue";
 
 const formRef = ref<FormInstance>();
 const props = defineProps({
